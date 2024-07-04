@@ -24,7 +24,17 @@ MORSE_VALUES: dict = {"A": ".-",
                       "W": ".--",
                       "X": "-..-",
                       "Y": "-.--",
-                      "Z": "--.."
+                      "Z": "--..",
+                      "0": "-----",
+                      "1": ".----",
+                      "2": "..---",
+                      "3": "...--",
+                      "4": "....-",
+                      "5": ".....",
+                      "6": "-....",
+                      "7": "--...",
+                      "8": "---..",
+                      "9": "----."
                       }
 
 
@@ -55,4 +65,25 @@ def decode(message: str) -> str:
             decrypted_message += plaintext_char
     return decrypted_message
 
-print(decode(message=".... . .-.. .-.. --- / .-- --- .-. .-.. -.."))
+
+def get_input() -> str:
+    while True:
+        try:
+            # asks for a direction (encode or decode)
+            direction: str = input("Encode or decode ( e or d): ").lower()
+            match direction:
+                case "e":
+                    # asks for message and inputs into encode function
+                    message: str = str(input("Message: "))
+                    result: str = encode(message)
+                    break
+                case "d":
+                    # asks for message and inputs into decode function
+                    message: str = str(input("Message: "))
+                    result: str = decode(message)
+                    break
+                case _:
+                    raise ValueError
+        except ValueError:
+            print("[!] Incorrect value entered...")
+    return result
