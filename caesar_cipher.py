@@ -48,3 +48,28 @@ def decode(message: str, shift: int) -> str:
             new_index: int = (index - shift) % 26
             decrypted_message += LOWERCASE[new_index]
     return decrypted_message
+
+
+def get_input() -> str:
+    while True:
+        try:
+            # asks for a direction (encode or decode)
+            direction: str = input("Encode or decode ( e or d): ").lower()
+            match direction:
+                case "e":
+                    # asks for message and shift and inputs into encode function
+                    message: str = input("Message: ")
+                    shift: int = int(input("Shift: "))
+                    result: str = encode(message, shift)
+                    break
+                case "d":
+                    # asks for message and shift and inputs into decode function
+                    message: str = str(input("Message: "))
+                    shift: int = int(input("Shift: "))
+                    result: str = decode(message, shift)
+                    break
+                case _:
+                    raise ValueError
+        except ValueError:
+            print("[!] Incorrect value entered...")
+    return result
